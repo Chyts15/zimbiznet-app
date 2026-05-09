@@ -1,4 +1,4 @@
-import Dexie, { Table } from 'dexie';
+import Dexie from 'dexie';
 
 export interface Business {
     id: string;
@@ -58,22 +58,22 @@ export interface SyncQueue {
 }
 
 class ZimBizDB extends Dexie {
-    businesses!: Table<Business>;
-    stockItems!: Table<StockItem>;
-    sales!: Table<Sale>;
-    creditCustomers!: Table<CreditCustomer>;
-    creditEntries!: Table<CreditEntry>;
-    syncQueue!: Table<SyncQueue>;
+    businesses!: any;
+    stockItems!: any;
+    sales!: any;
+    creditCustomers!: any;
+    creditEntries!: any;
+    syncQueue!: any;
 
     constructor() {
         super('zimbiznet');
         this.version(1).stores({
-            businesses:     'id, name, type',
-            stockItems:     'id, businessId, name',
-            sales:          'id, businessId, itemId, synced',
-            creditCustomers:'id, businessId, name',
-            creditEntries:  'id, customerId, paid, synced',
-            syncQueue:      '++id, type, createdAt'
+            businesses:      'id, name, type',
+            stockItems:      'id, businessId, name',
+            sales:           'id, businessId, itemId, synced',
+            creditCustomers: 'id, businessId, name',
+            creditEntries:   'id, customerId, paid, synced',
+            syncQueue:       '++id, type, createdAt'
         });
     }
 }
